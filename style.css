@@ -8,3 +8,27 @@ body {
 
 /* .container, input, button, #output styles are now handled by Bootstrap */
 
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.card {
+  transition: box-shadow 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.card:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+}
+
+#output {
+  transition: background 0.4s, color 0.4s;
+}
+
