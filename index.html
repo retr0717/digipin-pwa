@@ -10,14 +10,22 @@
   <script defer src="script.js"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>DigiPin Tracker</h1>
-    <input type="text" id="apiKeyInput" placeholder="Enter your DigiPin API Key" />
-    <button id="startBtn">Start Tracking</button>
-    <div id="output">
-      <p><strong>Latitude:</strong> <span id="lat">-</span></p>
-      <p><strong>Longitude:</strong> <span id="lon">-</span></p>
-      <p><strong>DigiPin:</strong> <span id="digipin">Waiting...</span></p>
+  <div class="container min-vh-100 d-flex flex-column justify-content-center align-items-center">
+    <div class="w-100" style="max-width: 400px;">
+      <div class="card shadow-lg p-4">
+        <h1 class="mb-4 text-center">DigiPin Tracker</h1>
+        <div class="mb-3">
+          <input type="text" id="apiKeyInput" class="form-control" placeholder="Enter your DigiPin API Key" />
+        </div>
+        <div class="d-grid mb-4">
+          <button id="startBtn" class="btn btn-primary btn-lg">Start Tracking</button>
+        </div>
+        <div id="output" class="bg-light rounded p-3">
+          <p class="mb-2"><strong>Latitude:</strong> <span id="lat">-</span></p>
+          <p class="mb-2"><strong>Longitude:</strong> <span id="lon">-</span></p>
+          <p class="mb-0"><strong>DigiPin:</strong> <span id="digipin">Waiting...</span></p>
+        </div>
+      </div>
     </div>
   </div>
 </body>
