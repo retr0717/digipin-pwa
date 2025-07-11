@@ -1,0 +1,16 @@
+{
+  "name": "DigiPin Tracker",
+  "short_name": "DigiPin",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0088ff",
+  "icons": [
+    {
+      "src": "https://api.iconify.design/map-outline.svg?color=0088ff",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+}
+
