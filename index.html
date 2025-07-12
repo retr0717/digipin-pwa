@@ -7,28 +7,58 @@
   <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="style.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <script defer src="script.js"></script>
 </head>
 <body>
-  <div class="container min-vh-100 d-flex flex-column justify-content-center align-items-center">
-    <div id="loader" class="mb-4" style="display: none;">
-      <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-    </div>
+  <div class="container min-vh-100 d-flex flex-column justify-content-center align-items-center p-0" style="background: #f5f6fa;">
     <div class="w-100" style="max-width: 400px;">
-      <div class="card shadow-lg p-4 fade-in">
-        <h1 class="mb-4 text-center">DigiPin Tracker</h1>
-        <div class="mb-3">
-          <input type="text" id="apiKeyInput" class="form-control" placeholder="Enter your DigiPin API Key" />
+      <div class="app-bar rounded-top-4 shadow-sm mb-0" style="background: #1976d2; padding: 1.2rem 1.5rem;">
+        <h1 class="mb-0 text-white fw-bold fs-3" style="letter-spacing: 1px;">DigiPin Tracker</h1>
+      </div>
+      <div class="card shadow-lg p-4 rounded-4 border-0 fade-in" style="margin-top: -10px;">
+        <!-- API Key Input Container -->
+        <div class="api-key-container mb-4 position-relative">
+          <input type="text" id="apiKeyInput" class="form-control form-control-lg rounded-3 floating-input" placeholder=" " autocomplete="off" />
+          <label for="apiKeyInput" id="apiKeyLabel" class="floating-label">DigiPin API Key</label>
+          <div class="mt-4 d-flex justify-content-center">
+            <button id="startBtn" class="btn btn-primary btn-lg rounded-circle shadow fab-btn position-relative" style="width: 64px; height: 64px;">
+              <i class="bi bi-play-fill align-middle" style="font-size: 2rem;"></i>
+            </button>
+          </div>
         </div>
-        <div class="d-grid mb-4">
-          <button id="startBtn" class="btn btn-primary btn-lg">Start Tracking</button>
-        </div>
-        <div id="output" class="bg-light rounded p-3">
-          <p class="mb-2"><strong>Latitude:</strong> <span id="lat">-</span></p>
-          <p class="mb-2"><strong>Longitude:</strong> <span id="lon">-</span></p>
-          <p class="mb-0"><strong>DigiPin:</strong> <span id="digipin">Waiting...</span></p>
+        
+        <!-- Tracking Container (initially hidden) -->
+        <div class="tracking-container" style="display: none; opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease-out, transform 0.7s ease-out;">
+          <div id="loader" class="mb-4 d-flex justify-content-center" style="display: none;">
+            <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+          
+          <div class="bg-light rounded-3 p-3 mb-4 border-0 shadow-sm">
+            <div class="d-flex justify-content-between align-items-center mb-2 latlon-row">
+              <div>
+                <small class="text-muted d-block mb-1">Latitude</small>
+                <span id="lat" class="fw-bold fs-5 d-block coord-value">-</span>
+              </div>
+              <div class="text-end">
+                <small class="text-muted d-block mb-1">Longitude</small>
+                <span id="lon" class="fw-bold fs-5 d-block coord-value">-</span>
+              </div>
+            </div>
+          </div>
+          
+          <div id="output" class="bg-light rounded-3 p-3 mb-4 border-0 shadow-sm output-anim text-center">
+            <small class="text-muted d-block mb-2">Your DigiPin</small>
+            <span id="digipin" class="fw-bold display-4 digipin-highlight">Waiting...</span>
+          </div>
+          
+          <div class="d-flex justify-content-center">
+            <button id="resetBtn" class="btn btn-outline-secondary btn-sm rounded-pill px-4">
+              <i class="bi bi-arrow-counterclockwise me-1"></i> Reset
+            </button>
+          </div>
         </div>
       </div>
     </div>

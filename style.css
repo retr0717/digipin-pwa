@@ -32,3 +32,106 @@ body {
   transition: background 0.4s, color 0.4s;
 }
 
+#loader {
+  display: none !important;
+}
+
+/* Floating label for API key input */
+.floating-input {
+  padding-top: 1.25rem;
+  padding-bottom: 0.25rem;
+  transition: border-color 0.3s;
+}
+.floating-label {
+  position: absolute;
+  top: 1.1rem;
+  left: 1.1rem;
+  color: #888;
+  font-size: 1.1rem;
+  pointer-events: none;
+  background: transparent;
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  z-index: 2;
+}
+.floating-input:focus + .floating-label,
+.floating-input:not(:placeholder-shown):not(:focus):valid + .floating-label {
+  top: 0.2rem;
+  left: 0.9rem;
+  font-size: 0.85rem;
+  color: #1976d2;
+  background: #fff;
+  padding: 0 0.2rem;
+  border-radius: 0.3rem;
+}
+
+/* Lat/Lon row */
+.latlon-row span {
+  letter-spacing: 0.5px;
+  transition: color 0.3s, font-size 0.3s;
+}
+
+/* DigiPin highlight */
+.digipin-highlight {
+  color: #1976d2;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  transition: all 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+  background: linear-gradient(90deg, #e3f2fd 0%, #bbdefb 100%);
+  border-radius: 0.5rem;
+  padding: 0.3em 0.8em;
+  box-shadow: 0 2px 12px rgba(25, 118, 210, 0.08);
+  display: inline-block;
+}
+
+.digipin-highlight:empty::before {
+  content: "Waiting...";
+  opacity: 0.5;
+}
+
+/* Animation for DigiPin when it changes */
+@keyframes pulse-highlight {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); background: linear-gradient(90deg, #bbdefb 0%, #90caf9 100%); }
+  100% { transform: scale(1); }
+}
+
+#digipin.highlight-animation {
+  animation: pulse-highlight 0.8s ease-in-out;
+}
+
+/* Output animation */
+.output-anim {
+  transition: box-shadow 0.4s, background 0.4s;
+  animation: fadeInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Coordinate value animations */
+.coord-value {
+  display: inline-block;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.coord-value.pulse {
+  color: #1976d2;
+  transform: scale(1.1);
+}
+
+/* Container transitions */
+.api-key-container, .tracking-container {
+  transition: opacity 0.7s cubic-bezier(0.165, 0.84, 0.44, 1), 
+              transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Reset button animations */
+#resetBtn {
+  transition: all 0.3s;
+  border-color: #bbdefb;
+  color: #1976d2;
+}
+#resetBtn:hover {
+  background: rgba(25, 118, 210, 0.05);
+  transform: translateY(-2px);
+}
+#resetBtn:active {
+  transform: translateY(0);
+}
+
