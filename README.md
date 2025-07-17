@@ -1,14 +1,14 @@
 # DigiPin Tracker
 
-A modern, responsive Progressive Web Application (PWA) for tracking and displaying location-based digital pins, designed to work as a widget on Android devices.
+A modern, responsive Progressive Web Application (PWA) for tracking and displaying location-based digital pins, with dedicated widget functionality for multiple platforms.
 
 ## Overview
 
-DigiPin Tracker is a lightweight PWA that converts geographic coordinates into unique digital pins. It provides a sleek, widget-like interface for real-time location tracking with a focus on usability and visual appeal.
+DigiPin Tracker is a lightweight application that converts geographic coordinates into unique digital pins. It provides a sleek interface for real-time location tracking with a focus on usability and visual appeal. The application includes a dedicated widget version that can be embedded across different platforms.
 
 ## Deployment to GitHub Pages
 
-To deploy this app to GitHub Pages and use it as a widget on your Android phone:
+To deploy this app to GitHub Pages:
 
 1. **Create a GitHub repository**:
    - Create a new repository on GitHub
@@ -32,27 +32,92 @@ To deploy this app to GitHub Pages and use it as a widget on your Android phone:
    - Wait a few minutes for the deployment to complete
    - Visit your GitHub Pages URL to ensure the app is working correctly
 
-## Adding to Android Home Screen as a Widget
+## Using DigiPin as a Widget
 
-1. **Open Chrome** on your Android device
-2. **Visit your GitHub Pages URL**: `https://YOUR_USERNAME.github.io/digipin-tracker/`
-3. **Install as PWA**:
-   - Tap the menu button (three dots) in Chrome
-   - Select "Add to Home screen" or "Install app"
-   - Follow the prompts to add the app to your home screen
+DigiPin Tracker includes a dedicated widget version (`widget.html`) that can be embedded in various platforms. This widget is designed to be compact and display essential information without requiring the full application.
 
-4. **Use as a Widget** (Android 12+):
-   - Long press on an empty area of your home screen
-   - Select "Widgets"
-   - Find "Chrome" or "Web App" widgets
-   - Look for DigiPin Tracker or select a Chrome shortcut widget
-   - Place it on your home screen
-   - Select the DigiPin Tracker PWA when prompted
+### Embedding the Widget on Websites
 
-5. **Alternative Widget Method**:
-   - Install a third-party app like "KWGT" or "Web Widget"
-   - Create a custom widget that loads your DigiPin Tracker URL
-   - Configure the widget size to match the app's compact design
+Add the widget to any website or blog using an iframe:
+
+```html
+<iframe 
+  src="https://YOUR_USERNAME.github.io/digipin-tracker/widget.html" 
+  width="300" 
+  height="200" 
+  frameborder="0"
+  title="DigiPin Tracker Widget">
+</iframe>
+```
+
+You can customize the widget by adding URL parameters:
+- `?demo=true` - Use demo mode (default)
+- `?apiKey=YOUR_API_KEY` - Use a real API key for live tracking
+
+### Widget for Windows (PC/Laptop)
+
+#### Using Rainmeter
+
+1. **Install Rainmeter** from [rainmeter.net](https://www.rainmeter.net/)
+2. **Create a new skin**:
+   ```ini
+   [Rainmeter]
+   Update=1000
+   
+   [WebParser]
+   Measure=WebParser
+   URL=https://YOUR_USERNAME.github.io/digipin-tracker/widget.html
+   Width=300
+   Height=200
+   ```
+3. **Save** the file with a `.ini` extension in your Rainmeter skins folder
+4. **Load the skin** from the Rainmeter manager
+
+#### Using Windows 11 Widgets
+
+1. **Install a third-party widget tool** like "Web Widget for Windows" from the Microsoft Store
+2. **Add a new widget** and enter your DigiPin widget URL
+3. **Configure size and refresh rate** as needed
+
+### Widget for macOS
+
+1. **Open Dashboard** (if using older macOS) or **Notification Center**
+2. **Add a Web Clip widget**:
+   - In Safari, navigate to your widget URL
+   - Select File > Add to Dashboard/Notification Center
+   - Adjust the size of the widget
+   - Click Add
+
+### Widget for Android
+
+#### Using KWGT (Kustom Widget Creator)
+
+1. **Install KWGT** from the Google Play Store
+2. **Add a KWGT widget** to your home screen
+3. **Configure the widget**:
+   - Add a "WebView" element
+   - Enter your widget URL: `https://YOUR_USERNAME.github.io/digipin-tracker/widget.html`
+   - Set refresh rate to 60 seconds or less
+   - Adjust size and appearance settings
+
+#### Using Web Widget
+
+1. **Install Web Widget** from the Google Play Store
+2. **Add the widget** to your home screen
+3. **Configure the widget**:
+   - Enter your widget URL
+   - Enable JavaScript
+   - Set refresh interval to 30-60 seconds
+   - Adjust size as needed
+
+### Widget for iOS
+
+iOS has limited support for true widgets, but you can:
+
+1. **Create a Shortcut** in the Shortcuts app
+2. **Add a "Show Web Page" action** with your widget URL
+3. **Add to Home Screen** or use in the Today View
+4. **Use third-party apps** like "Scriptable" for more advanced widget creation
 
 ## Features
 

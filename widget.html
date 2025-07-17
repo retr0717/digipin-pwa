@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DigiPin Widget</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #1976d2;
+      --primary-light: #bbdefb;
+      --primary-dark: #0d47a1;
+      --text-primary: #212121;
+      --text-secondary: #757575;
+      --background-light: #f5f6fa;
+      --card-bg: #ffffff;
+      --border-radius: 12px;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+      --font-primary: 'Inter', sans-serif;
+      --font-heading: 'Poppins', sans-serif;
+    }
+    
+    /* Dark mode variables */
+    .dark-mode {
+      --primary-color: #2196f3;
+      --primary-light: #1e3a5f;
+      --primary-dark: #64b5f6;
+      --text-primary: #e0e0e0;
+      --text-secondary: #b0b0b0;
+      --background-light: #121212;
+      --card-bg: #1e1e1e;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: var(--font-primary);
+      background-color: transparent;
+      color: var(--text-primary);
+      overflow: hidden;
+    }
+    
+    .widget-container {
+      width: 100%;
+      height: 100%;
+      padding: 8px;
+      background-color: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    
+    .widget-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 8px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .widget-title {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+    
+    .widget-icon {
+      font-size: 14px;
+      color: var(--primary-color);
+    }
+    
+    .widget-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 8px;
+    }
+    
+    .digipin-value {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary-color);
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, var(--primary-light) 0%, rgba(187, 222, 251, 0.2) 100%);
+      padding: 4px 12px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    
+    .location-data {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      color: var(--text-secondary);
+    }
+    
+    .location-icon {
+      font-size: 10px;
+      color: var(--primary-color);
+    }
+    
+    .widget-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 8px;
+      font-size: 10px;
+      color: var(--text-secondary);
+    }
+    
+    .timestamp {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    
+    .loading {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+    
+    .dark-mode .loading {
+      background: rgba(30, 30, 30, 0.8);
+    }
+    
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(25, 118, 210, 0.1);
+      border-radius: 50%;
+      border-top-color: var(--primary-color);
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .hidden {
+      display: none;
+    }
+    
+    /* Responsive sizing */
+    @media (max-width: 150px) {
+      .widget-header, .widget-footer {
+        display: none;
+      }
+      
+      .digipin-value {
+        font-size: 16px;
+        padding: 2px 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="widget-container">
+    <div class="widget-header">
+      <div class="widget-title">
+        <i class="bi bi-geo-alt-fill widget-icon"></i>
+        <span>DigiPin</span>
+      </div>
+      <div class="theme-toggle">
+        <i class="bi bi-moon-stars widget-icon" id="themeToggle"></i>
+      </div>
+    </div>
+    
+    <div class="widget-content">
+      <div class="digipin-value" id="digipin">SF7X94BD</div>
+      <div class="location-data">
+        <i class="bi bi-geo-alt-fill location-icon"></i>
+        <span id="lat">37.7749</span>,
+        <span id="lon">-122.4194</span>
+      </div>
+    </div>
+    
+    <div class="widget-footer">
+      <div class="timestamp">
+        <i class="bi bi-clock"></i>
+        <span id="timestamp">12:34 PM</span>
+      </div>
+      <div class="status">
+        <span id="status">Demo</span>
+      </div>
+    </div>
+    
+    <div class="loading hidden" id="loading">
+      <div class="spinner"></div>
+    </div>
+  </div>
+
+  <script>
+    // Initialize variables
+    let isDarkMode = false;
+    let demoMode = true;
+    let currentIndex = 0;
+    let intervalId = null;
+    
+    // DOM Elements
+    const themeToggle = document.getElementById('themeToggle');
+    const digipinEl = document.getElementById('digipin');
+    const latEl = document.getElementById('lat');
+    const lonEl = document.getElementById('lon');
+    const timestampEl = document.getElementById('timestamp');
+    const statusEl = document.getElementById('status');
+    const loadingEl = document.getElementById('loading');
+    
+    // Mock locations for demo mode
+    const mockLocations = [
+      { lat: 37.7749, lon: -122.4194, pin: "SF7X94BD" }, // San Francisco
+      { lat: 37.7755, lon: -122.4180, pin: "SF7X95AC" },
+      { lat: 40.7128, lon: -74.0060, pin: "NY6M28FG" }, // New York
+      { lat: 34.0522, lon: -118.2437, pin: "LA5K72HR" }, // Los Angeles
+      { lat: 51.5074, lon: -0.1278, pin: "LN9P36JQ" }    // London
+    ];
+    
+    // Theme toggle functionality
+    themeToggle.addEventListener('click', () => {
+      if (isDarkMode) {
+        document.body.classList.remove('dark-mode');
+        themeToggle.className = 'bi bi-moon-stars widget-icon';
+      } else {
+        document.body.classList.add('dark-mode');
+        themeToggle.className = 'bi bi-sun widget-icon';
+      }
+      isDarkMode = !isDarkMode;
+      
+      // Save preference if in browser context
+      try {
+        localStorage.setItem('widget-theme', isDarkMode ? 'dark' : 'light');
+      } catch (e) {
+        // Ignore if localStorage is not available (iframe restrictions)
+      }
+    });
+    
+    // Check for saved theme preference
+    try {
+      const savedTheme = localStorage.getItem('widget-theme');
+      if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        themeToggle.className = 'bi bi-sun widget-icon';
+        isDarkMode = true;
+      }
+    } catch (e) {
+      // Ignore if localStorage is not available
+    }
+    
+    // Function to update timestamp
+    function updateTimestamp() {
+      const now = new Date();
+      const options = { 
+        hour: 'numeric', 
+        minute: 'numeric',
+        hour12: true
+      };
+      timestampEl.textContent = now.toLocaleTimeString(undefined, options);
+    }
+    
+    // Function to update widget data
+    function updateWidgetData(lat, lon, pin) {
+      latEl.textContent = lat.toFixed(6);
+      lonEl.textContent = lon.toFixed(6);
+      digipinEl.textContent = pin;
+      updateTimestamp();
+    }
+    
+    // Check for URL parameters
+    function getUrlParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        apiKey: params.get('apiKey') || '',
+        demo: params.get('demo') === 'true'
+      };
+    }
+    
+    // Initialize widget
+    function initWidget() {
+      const params = getUrlParams();
+      
+      // If API key is provided, use it
+      if (params.apiKey && params.apiKey !== 'demo') {
+        demoMode = false;
+        statusEl.textContent = 'Live';
+        
+        // Start real tracking
+        if ("geolocation" in navigator) {
+          loadingEl.classList.remove('hidden');
+          
+          navigator.geolocation.watchPosition(
+            (pos) => {
+              const lat = pos.coords.latitude;
+              const lon = pos.coords.longitude;
+              
+              // Fetch DigiPin with API key
+              fetchDigiPin(lat, lon, params.apiKey);
+            },
+            (err) => {
+              console.error(err);
+              loadingEl.classList.add('hidden');
+              statusEl.textContent = 'Error';
+              digipinEl.textContent = 'Error';
+            },
+            {
+              enableHighAccuracy: true,
+              maximumAge: 30000,
+              timeout: 10000,
+            }
+          );
+        } else {
+          statusEl.textContent = 'No Geo';
+          digipinEl.textContent = 'No Location';
+        }
+      } else {
+        // Use demo mode
+        startDemoMode();
+      }
+    }
+    
+    // Fetch DigiPin from API
+    function fetchDigiPin(lat, lon, apiKey) {
+      loadingEl.classList.remove('hidden');
+      
+      fetch(`https://api.digipin.dev/generate/digipinFromCoordinates?lat=${lat}&lon=${lon}`, {
+        headers: {
+          "X-API-Key": apiKey,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            updateWidgetData(lat, lon, data.data.digipin);
+          } else {
+            digipinEl.textContent = 'API Error';
+            statusEl.textContent = 'Error';
+          }
+          loadingEl.classList.add('hidden');
+        })
+        .catch((err) => {
+          console.error(err);
+          digipinEl.textContent = 'Error';
+          statusEl.textContent = 'Error';
+          loadingEl.classList.add('hidden');
+        });
+    }
+    
+    // Start demo mode
+    function startDemoMode() {
+      statusEl.textContent = 'Demo';
+      
+      // Initial update
+      const { lat, lon, pin } = mockLocations[currentIndex];
+      updateWidgetData(lat, lon, pin);
+      
+      // Set up interval for location changes
+      intervalId = setInterval(() => {
+        currentIndex = (currentIndex + 1) % mockLocations.length;
+        const location = mockLocations[currentIndex];
+        
+        updateWidgetData(location.lat, location.lon, location.pin);
+      }, 10000); // Change location every 10 seconds
+    }
+    
+    // Initialize the widget
+    document.addEventListener('DOMContentLoaded', initWidget);
+    
+    // Handle visibility changes (for power saving)
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        if (demoMode && !intervalId) {
+          startDemoMode();
+        }
+        updateTimestamp();
+      } else if (demoMode && intervalId) {
+        clearInterval(intervalId);
+        intervalId = null;
+      }
+    });
+    
+    // Handle messages from parent frame
+    window.addEventListener('message', (event) => {
+      // Check origin for security
+      if (event.data && event.data.type === 'refresh') {
+        updateTimestamp();
+        if (demoMode) {
+          currentIndex = (currentIndex + 1) % mockLocations.length;
+          const location = mockLocations[currentIndex];
+          updateWidgetData(location.lat, location.lon, location.pin);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
