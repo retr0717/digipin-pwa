@@ -851,7 +851,8 @@ body {
     border-radius: 0;
     min-height: calc(100vh - 56px); /* Adjusted for smaller header */
   }
-}/
+}
+
 * Ultra Compact DigiPin Display */
 .digipin-display-container {
   background: var(--card-bg);
