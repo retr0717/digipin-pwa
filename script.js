@@ -324,11 +324,32 @@ function startDemoMode() {
   let currentIndex = 0;
   const { lat, lon, pin, accuracy } = mockLocations[currentIndex];
   
+  // Explicitly hide waiting indicator
+  document.getElementById('waiting-indicator').classList.add('hidden');
+  
   setTimeout(() => {
     updateCoordinates(lat, lon);
     updateAccuracyIndicator(accuracy);
-    updateDigiPin(pin);
+    
+    // Show the DigiPin value
+    const digipinEl = document.getElementById("digipin");
+    digipinEl.textContent = pin;
+    digipinEl.style.opacity = '1';
+    digipinEl.style.transform = 'translateY(0)';
+    digipinEl.classList.add("highlight");
+    
+    // Make sure waiting indicator is hidden
+    document.getElementById('waiting-indicator').classList.add('hidden');
+    
+    // Update timestamp
     updateTimestamp();
+    
+    // Hide loader
+    hideLoader();
+    
+    setTimeout(() => {
+      digipinEl.classList.remove("highlight");
+    }, 1200);
     
     // Set up interval for location changes
     const intervalId = setInterval(() => {
@@ -337,7 +358,22 @@ function startDemoMode() {
       
       updateCoordinates(location.lat, location.lon);
       updateAccuracyIndicator(location.accuracy);
-      updateDigiPin(location.pin);
+      
+      // Update DigiPin directly instead of using updateDigiPin function
+      digipinEl.style.opacity = '0';
+      digipinEl.style.transform = 'translateY(10px)';
+      
+      setTimeout(() => {
+        digipinEl.textContent = location.pin;
+        digipinEl.classList.add("highlight");
+        digipinEl.style.opacity = '1';
+        digipinEl.style.transform = 'translateY(0)';
+        
+        setTimeout(() => {
+          digipinEl.classList.remove("highlight");
+        }, 1200);
+      }, 300);
+      
       updateTimestamp();
     }, 5000); // Change location every 5 seconds
     
