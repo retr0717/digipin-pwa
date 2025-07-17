@@ -850,4 +850,74 @@ body {
   .coordinate-item.full-width {
     grid-column: span 1;
   }
+}/
+* Compact Location Data Strip */
+.location-data-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.75rem;
+  box-shadow: var(--shadow-sm);
+  font-size: 0.8rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.location-data-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.location-label {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.location-value {
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: all var(--transition-normal);
+}
+
+.location-value.pulse {
+  color: var(--primary-color);
+  transform: scale(1.05);
+}
+
+.timestamp {
+  margin-left: auto;
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.timestamp i {
+  font-size: 0.7rem;
+}
+
+/* Make map preview even smaller */
+.map-preview {
+  height: 80px; /* Further reduced height */
+  margin-bottom: 0.75rem; /* Reduced margin */
+}
+
+/* Make DigiPin card more compact */
+.digipin-display {
+  padding: 1rem 1rem; /* Further reduced padding */
+  min-height: 70px; /* Further reduced height */
+}
+
+.digipin-footer {
+  padding: 0.5rem 0.75rem; /* Further reduced padding */
+}
+
+.card-header {
+  padding: 0.6rem 0.75rem; /* Further reduced padding */
 }

@@ -42,7 +42,7 @@
           <div class="welcome-message">
             <h2>DigiPin</h2>
             <p>Secure location tracking</p>
-          </div>
+          </div>  
 
           <div class="input-group">
             <div class="floating-field">
@@ -83,35 +83,21 @@
             </div>
           </div>
 
-          <!-- Coordinates Card -->
-          <div class="coordinates-card card-shadow">
-            <div class="card-header">
-              <h3>Location Data</h3>
+          <!-- Compact Location Data -->
+          <div class="location-data-strip">
+            <div class="location-data-item">
+              <span class="location-label">Lat: </span>
+              <span id="lat" class="location-value">-</span>
+            </div>
+            <div class="location-data-item">
+              <span class="location-label">Lon: </span>
+              <span id="lon" class="location-value">-</span>
+            </div>
+            <div class="location-data-item timestamp">
+              <i class="bi bi-clock"></i>
+              <span id="timestamp" class="location-value">-</span>
               <div id="refreshIndicator" class="refresh-indicator">
                 <i class="bi bi-arrow-repeat"></i>
-              </div>
-            </div>
-            <div class="coordinates-grid">
-              <div class="coordinate-item">
-                <div class="coordinate-label">
-                  <i class="bi bi-compass"></i>
-                  <span>Latitude</span>
-                </div>
-                <div id="lat" class="coordinate-value">-</div>
-              </div>
-              <div class="coordinate-item">
-                <div class="coordinate-label">
-                  <i class="bi bi-compass"></i>
-                  <span>Longitude</span>
-                </div>
-                <div id="lon" class="coordinate-value">-</div>
-              </div>
-              <div class="coordinate-item full-width">
-                <div class="coordinate-label">
-                  <i class="bi bi-clock"></i>
-                  <span>Last Updated</span>
-                </div>
-                <div id="timestamp" class="coordinate-value">-</div>
               </div>
             </div>
           </div>
