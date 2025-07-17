@@ -851,4 +851,209 @@ body {
     border-radius: 0;
     min-height: calc(100vh - 56px); /* Adjusted for smaller header */
   }
+}/
+* Ultra Compact DigiPin Display */
+.digipin-display-container {
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+}
+
+.digipin-display-container:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.digipin-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 80px;
+  padding: 0.75rem 0.5rem;
+}
+
+.digipin-value {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, var(--primary-light) 0%, rgba(187, 222, 251, 0.2) 100%);
+  padding: 0.4rem 1.25rem;
+  border-radius: 8px;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-align: center;
+  margin-bottom: 0.5rem;
+  min-width: 180px;
+  box-shadow: 0 2px 10px rgba(25, 118, 210, 0.1);
+}
+
+.dark-mode .digipin-value {
+  background: linear-gradient(90deg, var(--primary-light) 0%, rgba(33, 150, 243, 0.1) 100%);
+  box-shadow: 0 2px 10px rgba(33, 150, 243, 0.15);
+}
+
+.digipin-value.highlight {
+  animation: digipin-pulse 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+@keyframes digipin-pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 2px 10px rgba(25, 118, 210, 0.1);
+  }
+  20% {
+    transform: scale(1.08);
+    box-shadow: 0 5px 20px rgba(25, 118, 210, 0.3);
+  }
+  40% {
+    transform: scale(1.03);
+  }
+  60% {
+    transform: scale(1.05);
+    box-shadow: 0 3px 15px rgba(25, 118, 210, 0.2);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 2px 10px rgba(25, 118, 210, 0.1);
+  }
+}
+
+.digipin-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.validity-text {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.validity-text::before {
+  content: "•";
+  color: #4caf50;
+  font-size: 1.2rem;
+  line-height: 0;
+  margin-right: 0.25rem;
+}
+
+/* Waiting module with improved animation */
+.waiting-module {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  z-index: 2;
+  gap: 0.5rem;
+}
+
+.dark-mode .waiting-module {
+  background: rgba(30, 30, 30, 0.9);
+}
+
+.waiting-module.hidden {
+  display: none;
+}
+
+/* Pulse ring animation */
+.pulse-ring {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(25, 118, 210, 0.1);
+  animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+}
+
+/* Error module */
+.error-module {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  z-index: 2;
+  gap: 0.5rem;
+}
+
+.dark-mode .error-module {
+  background: rgba(30, 30, 30, 0.9);
+}
+
+.error-module.hidden {
+  display: none;
+}
+
+.error-module i {
+  color: #f44336;
+  font-size: 1.5rem;
+  animation: error-bounce 1s ease-in-out;
+}
+
+.error-module small {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  animation: error-fade 1s ease-in-out;
+}
+
+@keyframes error-bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes error-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

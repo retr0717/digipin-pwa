@@ -99,24 +99,24 @@
             </div>
           </div>
 
-          <!-- DigiPin Output - Compact Version -->
-          <div id="output" class="digipin-card card-shadow">
-            <div class="card-header">
-              <h3>DigiPin</h3>
-              <button id="copyBtn" class="icon-btn" aria-label="Copy DigiPin">
-                <i class="bi bi-clipboard"></i>
-              </button>
-            </div>
+          <!-- Ultra Compact DigiPin Display -->
+          <div id="output" class="digipin-display-container">
             <div id="digipin-container" class="digipin-display">
               <div id="digipin" class="digipin-value"></div>
+              <div class="digipin-actions">
+                <button id="copyBtn" class="icon-btn" aria-label="Copy DigiPin">
+                  <i class="bi bi-clipboard"></i>
+                </button>
+                <small id="validityText" class="validity-text">5min</small>
+              </div>
+              <!-- Waiting/Error States -->
               <div id="waiting-indicator" class="waiting-module">
+                <div class="pulse-ring"></div>
                 <div class="dot-pulse"></div>
               </div>
-            </div>
-            <div class="digipin-footer">
-              <div class="validity-indicator">
-                <i class="bi bi-shield-check"></i>
-                <span id="validityText">Valid 5min</span>
+              <div id="error-indicator" class="error-module hidden">
+                <i class="bi bi-exclamation-circle"></i>
+                <small id="errorText">Connection error</small>
               </div>
             </div>
           </div>

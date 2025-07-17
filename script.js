@@ -251,24 +251,45 @@ function fetchDigiPin(lat, lon, apiKey) {
     .then((res) => res.json())
     .then((data) => {
       const digipinEl = document.getElementById("digipin");
+      const errorIndicator = document.getElementById("error-indicator");
+      const errorText = document.getElementById("errorText");
+      
       if (data.success) {
+        // Hide error indicator if it was showing
+        errorIndicator.classList.add("hidden");
+        
+        // Update DigiPin with success data
         digipinEl.textContent = data.data.digipin;
-        document.getElementById("validityText").textContent = "Valid for 5 minutes";
+        document.getElementById("validityText").textContent = "5min";
+        
+        // Animate the DigiPin value
+        digipinEl.style.opacity = '1';
+        digipinEl.style.transform = 'translateY(0)';
+        digipinEl.classList.add("highlight");
+        
+        setTimeout(() => {
+          digipinEl.classList.remove("highlight");
+        }, 1200);
       } else {
-        digipinEl.textContent = "API error";
-        document.getElementById("validityText").textContent = "Error";
+        // Show API error
         console.error(data);
+        errorText.textContent = "API error";
+        errorIndicator.classList.remove("hidden");
+        showToast("API error: " + (data.message || "Unknown error"), "error");
       }
-      animateValueChange(digipinEl);
       hideLoader();
     })
     .catch((err) => {
-      const digipinEl = document.getElementById("digipin");
-      digipinEl.textContent = "Fetch error";
-      document.getElementById("validityText").textContent = "Error";
-      animateValueChange(digipinEl);
       console.error(err);
       hideLoader();
+      
+      // Show error indicator with appropriate message
+      const errorIndicator = document.getElementById("error-indicator");
+      const errorText = document.getElementById("errorText");
+      errorText.textContent = "Connection error";
+      errorIndicator.classList.remove("hidden");
+      
+      // Show toast notification
       showToast("Failed to fetch DigiPin", "error");
     });
 }
@@ -325,19 +346,29 @@ function startDemoMode() {
   }, 1500);
 }
 
-// Helper function to update DigiPin with animation
+// Helper function to update DigiPin with enhanced animation
 function updateDigiPin(pin) {
   hideLoader();
   const digipinEl = document.getElementById("digipin");
+  const errorIndicator = document.getElementById("error-indicator");
+  
+  // Hide error indicator if it was showing
+  errorIndicator.classList.add("hidden");
   
   // Fade out current value
   digipinEl.style.opacity = '0';
+  digipinEl.style.transform = 'translateY(10px)';
   
-  // After short delay, update and fade in new value
+  // After short delay, update and fade in new value with enhanced animation
   setTimeout(() => {
     digipinEl.textContent = pin;
-    animateValueChange(digipinEl);
+    digipinEl.classList.add("highlight");
     digipinEl.style.opacity = '1';
+    digipinEl.style.transform = 'translateY(0)';
+    
+    setTimeout(() => {
+      digipinEl.classList.remove("highlight");
+    }, 1200);
   }, 300);
 }
 
