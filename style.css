@@ -920,4 +920,58 @@ body {
 
 .card-header {
   padding: 0.6rem 0.75rem; /* Further reduced padding */
+}/
+* Single Row Location Data Strip */
+.location-data-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 0.4rem 0.6rem;
+  margin-bottom: 0.5rem;
+  box-shadow: var(--shadow-sm);
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+.location-data-item {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.location-icon {
+  color: var(--primary-color);
+  font-size: 0.7rem;
+}
+
+.location-value {
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: all var(--transition-normal);
+  font-size: 0.7rem;
+}
+
+.location-value.pulse {
+  color: var(--primary-color);
+  transform: scale(1.05);
+}
+
+.timestamp {
+  margin-left: auto;
+  color: var(--text-secondary);
+  font-size: 0.65rem;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.timestamp i {
+  font-size: 0.65rem;
+}
+
+.refresh-indicator {
+  margin-left: 0.3rem;
+  font-size: 0.7rem;
 }
