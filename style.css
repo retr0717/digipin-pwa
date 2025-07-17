@@ -166,8 +166,10 @@ body {
 .floating-field {
   position: relative;
   margin-bottom: 0.5rem;
-  width: 90%; /* Make input narrower */
-  max-width: 280px; /* Limit max width */
+  width: 100%; /* Full width of parent */
+  max-width: 240px; /* Smaller max width for more widget-like appearance */
+  margin-left: auto; /* Center horizontally */
+  margin-right: auto; /* Center horizontally */
 }
 
 .floating-input {
@@ -194,21 +196,20 @@ body {
 .floating-label {
   position: absolute;
   top: 50%;
-  left: 50%; /* Center label */
-  transform: translate(-50%, -50%); /* Center label */
+  left: 0;
+  right: 0; /* Ensure label spans full width */
+  transform: translateY(-50%); /* Center vertically only */
   font-size: 1rem;
   color: var(--text-hint);
   pointer-events: none;
   transition: all var(--transition-fast);
-  width: 90%;
   text-align: center; /* Center text */
 }
 
 .floating-input:focus + .floating-label,
 .floating-input:not(:placeholder-shown) + .floating-label {
   top: 0.75rem;
-  left: 50%;
-  transform: translateX(-50%); /* Keep centered horizontally */
+  transform: translateY(0); /* No vertical centering when active */
   font-size: 0.75rem;
   color: var(--primary-color);
 }
